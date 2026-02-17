@@ -17,24 +17,6 @@ export default function Portfolio() {
       gradient: "from-orange-600 via-red-600 to-pink-600",
       icon: "📱",
       description: "Cross-platform mobile app with intuitive user interface"
-    },
-    {
-      category: "SaaS Platform",
-      gradient: "from-green-600 via-emerald-600 to-teal-600",
-      icon: "☁️",
-      description: "Cloud-based solution for business automation"
-    },
-    {
-      category: "Portfolio Website",
-      gradient: "from-indigo-600 via-purple-600 to-pink-600",
-      icon: "🎨",
-      description: "Creative showcase with stunning visual design"
-    },
-    {
-      category: "Healthcare System",
-      gradient: "from-cyan-600 via-blue-600 to-indigo-600",
-      icon: "🏥",
-      description: "Patient management and telemedicine platform"
     }
   ];
 
