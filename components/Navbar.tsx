@@ -42,7 +42,7 @@ export default function Navbar() {
             <img 
               src="/images/arnytics llc (1).png" 
               alt="Earnytics LLC" 
-              className="h-10 w-auto"
+              className="h-16 md:h-20 w-auto"
             />
           </div>
           <div className="hidden md:flex space-x-3 text-sm">
