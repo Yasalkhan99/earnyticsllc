@@ -39,9 +39,11 @@ export default function Navbar() {
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <span className="text-2xl font-bold text-white">
-              Earnytics <span className="text-orange-500">LLC</span>
-            </span>
+            <img 
+              src="/images/arnytics llc (1).png" 
+              alt="Earnytics LLC" 
+              className="h-10 w-auto"
+            />
           </div>
           <div className="hidden md:flex space-x-3 text-sm">
             <button 
