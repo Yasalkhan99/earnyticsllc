@@ -17,7 +17,7 @@ export default function Navbar() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const offset = 80; // Navbar height offset
+      const offset = 60; // Navbar height offset
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -36,13 +36,13 @@ export default function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-6 py-4">
+      <div className="container mx-auto px-6 py-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <img 
               src="/images/arnytics llc (1).png" 
               alt="Earnytics LLC" 
-              className="h-16 md:h-20 w-auto"
+              className="h-12 md:h-14 w-auto"
             />
           </div>
           <div className="hidden md:flex space-x-3 text-sm">
