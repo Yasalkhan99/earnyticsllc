@@ -70,7 +70,7 @@ export default function Navbar() {
             </button>
           </div>
           <div className="flex items-center space-x-3">
-            <a href="tel:+13475887791">
+            <a href="tel:+18472087685">
               <button className="bg-transparent border-2 border-white/50 hover:border-white text-white px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 transform hover:scale-105 flex items-center space-x-2">
                 <span>📞</span>
                 <span>Call Now</span>

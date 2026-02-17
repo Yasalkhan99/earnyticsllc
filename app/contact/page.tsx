@@ -115,8 +115,8 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-lg mb-1">Our Office</h3>
                     <p className="text-white/90">
-                      3415 MCLAUGHLIN #107<br />
-                      LOS ANGELES, CA 90066
+                      734 S Charlotte St<br />
+                      Lombard, IL 60148
                     </p>
                   </div>
                 </div>
@@ -141,8 +141,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg mb-1">Call Us</h3>
-                    <a href="tel:+13475887791" className="text-white/90 hover:text-white transition">
-                      +1 (347) 588-7791
+                    <a href="tel:+18472087685" className="text-white/90 hover:text-white transition">
+                      +1 (847) 208-7685
                     </a>
                   </div>
                 </div>
@@ -206,7 +206,7 @@ export default function ContactPage() {
               <div className="text-center">
                 <span className="text-6xl mb-4 block">🗺️</span>
                 <p className="text-gray-600 font-medium">Map Integration</p>
-                <p className="text-gray-500 text-sm">Los Angeles, CA 90066</p>
+                <p className="text-gray-500 text-sm">Lombard, IL 60148</p>
               </div>
             </div>
           </div>

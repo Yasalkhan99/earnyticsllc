@@ -22,7 +22,7 @@ export default function Footer() {
         <div className="flex flex-wrap justify-center items-center gap-8 mb-8 text-sm text-gray-300">
           <div className="flex items-center space-x-2">
             <span className="text-orange-500">📍</span>
-            <span>3415 MCLAUGHLIN #107 LOS ANGELES, CA 90066</span>
+            <span>734 S Charlotte St, Lombard, IL 60148</span>
           </div>
           <div className="flex items-center space-x-2">
             <span className="text-orange-500">📧</span>
@@ -30,7 +30,7 @@ export default function Footer() {
           </div>
           <div className="flex items-center space-x-2">
             <span className="text-orange-500">📱</span>
-            <span>+1 (347) 588-7791</span>
+            <span>+1 (847) 208-7685</span>
           </div>
         </div>
 
