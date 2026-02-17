@@ -3,19 +3,22 @@ export default function Portfolio() {
     {
       category: "E-Commerce Platform",
       gradient: "from-purple-600 via-pink-600 to-red-600",
-      icon: "🛒",
+      iconImage: "/images/Ecommerce.png",
+      bgImage: "/images/Ecommerce.jpg",
       description: "Modern online shopping experience with seamless checkout"
     },
     {
       category: "Business Dashboard",
       gradient: "from-blue-600 via-cyan-600 to-teal-600",
-      icon: "📊",
+      iconImage: "/images/Dashboard.png",
+      bgImage: "/images/istockphoto-1488294044-612x612.jpg",
       description: "Real-time analytics and data visualization platform"
     },
     {
       category: "Mobile Application",
       gradient: "from-orange-600 via-red-600 to-pink-600",
-      icon: "📱",
+      iconImage: "/images/Mobile application.png",
+      bgImage: "/images/360_F_900653724_MPXCtoE2xAi5ME5BRQrriIIKTv0X9dkV.jpg",
       description: "Cross-platform mobile app with intuitive user interface"
     }
   ];
@@ -39,17 +42,24 @@ export default function Portfolio() {
               key={index}
               className="group relative bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 hover:border-orange-500 transition-all duration-300 hover:shadow-2xl hover:scale-105"
             >
-              {/* Gradient Background with Icon */}
-              <div className={`aspect-[4/3] relative overflow-hidden bg-gradient-to-br ${item.gradient} flex items-center justify-center`}>
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
-                <div className="relative z-10 text-center">
-                  <div className="text-8xl mb-4 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-2xl">
-                    {item.icon}
-                  </div>
-                  <div className="px-6">
-                    <div className="bg-white/20 backdrop-blur-md rounded-lg px-4 py-2 inline-block">
-                      <p className="text-white font-semibold text-sm">{item.category}</p>
-                    </div>
+              {/* Gradient or Image Background with Icon */}
+              <div
+                className={`aspect-[4/3] relative overflow-hidden ${!("bgImage" in item && item.bgImage) ? `bg-gradient-to-br ${item.gradient}` : ""}`}
+                style={"bgImage" in item && item.bgImage ? { backgroundImage: `url(${item.bgImage})`, backgroundSize: "cover", backgroundPosition: "center" } : undefined}
+              >
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors duration-300"></div>
+                {/* Small circular icon - left corner */}
+                <div className="absolute top-4 left-4 z-10 w-14 h-14 rounded-full bg-white/25 backdrop-blur-md flex items-center justify-center border border-white/30 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <img
+                    src={item.iconImage}
+                    alt={item.category}
+                    className="w-8 h-8 object-contain"
+                  />
+                </div>
+                {/* Category label - left side below icon */}
+                <div className="absolute top-20 left-4 z-10">
+                  <div className="bg-white/20 backdrop-blur-md rounded-lg px-3 py-1.5 inline-block">
+                    <p className="text-white font-semibold text-sm">{item.category}</p>
                   </div>
                 </div>
                 

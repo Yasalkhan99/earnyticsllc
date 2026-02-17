@@ -11,9 +11,11 @@ export default function Footer() {
         {/* Logo Section */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-2 mb-6">
-            <span className="text-4xl font-bold">
-              Earnytics <span className="text-orange-500">LLC</span>
-            </span>
+            <img 
+              src="/images/arnytics llc (1).png" 
+              alt="Earnytics LLC" 
+              className="h-16 md:h-20 w-auto"
+            />
           </div>
           <p className="text-sm text-orange-500 uppercase tracking-wider">Digital Solutions</p>
         </div>
