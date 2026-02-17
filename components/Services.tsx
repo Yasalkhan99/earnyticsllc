@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Services() {
   const services = [
     {
@@ -55,9 +57,11 @@ export default function Services() {
               className="group bg-white p-8 rounded-2xl border border-gray-200 hover:border-orange-500 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
             >
               <div className={`w-20 h-20 bg-gradient-to-br ${service.gradient} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg p-3`}>
-                <img 
+                <Image 
                   src={service.icon} 
                   alt={service.title}
+                  width={80}
+                  height={80}
                   className="w-full h-full object-contain"
                 />
               </div>

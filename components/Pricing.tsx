@@ -154,9 +154,11 @@ export default function Pricing() {
               {/* Header - Fixed Height */}
               <div className={`relative bg-gradient-to-br ${plan.gradient} p-8 text-white text-center h-[180px] flex flex-col justify-center transition-all duration-300 group-hover:brightness-110`}>
                 <div className="w-20 h-20 mx-auto mb-3 transform group-hover:scale-110 transition-transform duration-300">
-                  <img 
+                  <Image 
                     src={plan.icon} 
                     alt={plan.name}
+                    width={80}
+                    height={80}
                     className="w-full h-full object-contain drop-shadow-lg"
                   />
                 </div>
@@ -255,9 +257,11 @@ export default function Pricing() {
               ].map((item, idx) => (
                 <div key={idx} className="text-center group hover:scale-105 transition-transform">
                   <div className="w-16 h-16 mx-auto mb-3 relative">
-                    <img 
+                    <Image 
                       src={item.icon} 
                       alt={item.title}
+                      width={64}
+                      height={64}
                       className="w-full h-full object-contain group-hover:scale-110 transition-transform"
                     />
                   </div>

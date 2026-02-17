@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 export default function Footer() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -11,9 +13,11 @@ export default function Footer() {
         {/* Logo Section */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-2 mb-6">
-            <img 
+            <Image 
               src="/images/arnytics llc (1).png" 
               alt="Earnytics LLC" 
+              width={160}
+              height={80}
               className="h-16 md:h-20 w-auto"
             />
           </div>

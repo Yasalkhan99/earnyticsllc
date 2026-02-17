@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Portfolio() {
   const portfolioItems = [
     {
@@ -50,9 +52,11 @@ export default function Portfolio() {
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors duration-300"></div>
                 {/* Small circular icon - left corner */}
                 <div className="absolute top-4 left-4 z-10 w-14 h-14 rounded-full bg-white/25 backdrop-blur-md flex items-center justify-center border border-white/30 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                  <img
+                  <Image
                     src={item.iconImage}
                     alt={item.category}
+                    width={32}
+                    height={32}
                     className="w-8 h-8 object-contain"
                   />
                 </div>

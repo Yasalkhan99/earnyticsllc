@@ -62,9 +62,11 @@ export default function Hero() {
           <div className="relative -mt-8 lg:-mt-12 animate-slideInRight">
             <div className="relative max-w-2xl mx-auto">
               {/* Real Image - Larger and positioned higher */}
-              <img
+              <Image
                 src="/images/crowd-funding-3d-illustration.png"
                 alt="Crowd Funding Illustration"
+                width={672}
+                height={504}
                 className="w-full h-auto object-contain drop-shadow-2xl"
               />
             </div>

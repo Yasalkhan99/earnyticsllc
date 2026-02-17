@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
@@ -57,17 +58,21 @@ export default function Navbar() {
               className="flex items-center space-x-2 cursor-pointer"
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             >
-              <img
+              <Image
                 src="/images/arnytics llc (1).png"
                 alt="Earnytics LLC"
+                width={160}
+                height={80}
                 className="h-16 md:h-20 w-auto"
               />
             </div>
           ) : (
             <Link href="/" className="flex items-center space-x-2">
-              <img
+              <Image
                 src="/images/arnytics llc (1).png"
                 alt="Earnytics LLC"
+                width={160}
+                height={80}
                 className="h-16 md:h-20 w-auto"
               />
             </Link>
