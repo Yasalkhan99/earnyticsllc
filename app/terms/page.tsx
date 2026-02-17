@@ -23,7 +23,7 @@ export default function TermsPage() {
           <section className="mb-10">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">1. Agreement to Terms</h2>
             <p className="text-gray-700 leading-relaxed mb-4">
-              By accessing and using Earnytics LLC's services, you agree to be bound by these Terms and Conditions. 
+              By accessing and using Earnytics LLC&apos;s services, you agree to be bound by these Terms and Conditions. 
               If you do not agree with any part of these terms, you must not use our services.
             </p>
             <p className="text-gray-700 leading-relaxed">

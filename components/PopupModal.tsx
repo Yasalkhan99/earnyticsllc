@@ -32,8 +32,8 @@ export default function PopupModal({ isOpen, onClose }: PopupModalProps) {
 
         {/* Compact Header */}
         <div className="bg-gradient-to-br from-blue-500 via-cyan-500 to-teal-500 p-6 text-white text-center">
-          <h2 className="text-2xl font-bold mb-1">Let's Get Started!</h2>
-          <p className="text-white/90 text-sm">We'll respond within 24 hours</p>
+          <h2 className="text-2xl font-bold mb-1">Let&apos;s Get Started!</h2>
+          <p className="text-white/90 text-sm">We&apos;ll respond within 24 hours</p>
         </div>
 
         {/* Compact Form */}

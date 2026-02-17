@@ -11,7 +11,7 @@ export default function ContactPage() {
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-5xl font-bold mb-4">Get In Touch</h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Have a question or want to work together? We'd love to hear from you.
+            Have a question or want to work together? We&apos;d love to hear from you.
           </p>
         </div>
       </div>

@@ -42,7 +42,7 @@ export default function Hero() {
               We deliver cutting-edge solutions that drive business transformation, helping you scale faster and compete smarter in the modern digital economy.
             </p>
             <p className="text-gray-400 mb-8 animate-slideInLeft" style={{ animationDelay: '0.6s' }}>
-              From brand development and web innovation to marketing automation and growth strategies - we're your partner in success.
+              From brand development and web innovation to marketing automation and growth strategies - we&apos;re your partner in success.
             </p>
             <div className="flex flex-wrap gap-4 animate-slideInLeft" style={{ animationDelay: '0.8s' }}>
               <button 
@@ -53,7 +53,7 @@ export default function Hero() {
               </button>
               <a href="/contact">
                 <button className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full text-base font-semibold hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
-                  Let's Talk →
+                  Let&apos;s Talk →
                 </button>
               </a>
             </div>
