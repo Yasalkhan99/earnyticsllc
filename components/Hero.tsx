@@ -7,6 +7,7 @@ import PopupModal from "./PopupModal";
 
 export default function Hero() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [videoFailed, setVideoFailed] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -26,21 +27,28 @@ export default function Hero() {
 
   return (
     <div className="relative text-white overflow-hidden">
-      {/* Video Background */}
+      {/* Background: gradient always (fallback when video missing on live); video on top when available */}
+      <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-navy-900 via-navy-800 to-navy-900" />
       <div className="absolute inset-0 w-full h-full overflow-hidden">
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/images/GettyImages-1311462781.mov" type="video/mp4" />
-        </video>
+        {!videoFailed && (
+          <video
+            ref={videoRef}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="absolute inset-0 w-full h-full object-cover"
+            onError={() => setVideoFailed(true)}
+          >
+            <source
+              src={process.env.NEXT_PUBLIC_HERO_VIDEO_URL || "/images/GettyImages-1311462781.mov"}
+              type="video/mp4"
+            />
+          </video>
+        )}
         {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-br from-navy-900/80 via-navy-900/70 to-navy-800/80"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-navy-900/80 via-navy-900/70 to-navy-800/80" />
       </div>
 
       {/* Sticky Navigation */}
