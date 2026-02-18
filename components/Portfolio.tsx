@@ -69,9 +69,12 @@ export default function Portfolio() {
                 
                 {/* Overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-8">
-                  <button className="bg-white text-gray-900 px-6 py-3 rounded-full font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 hover:bg-orange-500 hover:text-white">
+                  <a
+                    href="#pricing"
+                    className="inline-flex items-center bg-white text-gray-900 px-6 py-3 rounded-full font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 hover:bg-orange-500 hover:text-white"
+                  >
                     View Details →
-                  </button>
+                  </a>
                 </div>
 
                 {/* Decorative Elements */}

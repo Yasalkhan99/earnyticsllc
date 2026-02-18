@@ -2,21 +2,39 @@
 
 import Image from "next/image";
 import Navbar from "./Navbar";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import PopupModal from "./PopupModal";
 
 export default function Hero() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const play = () => {
+      video.play().catch(() => {});
+    };
+    play();
+    video.addEventListener("canplay", play);
+    video.addEventListener("loadeddata", play);
+    return () => {
+      video.removeEventListener("canplay", play);
+      video.removeEventListener("loadeddata", play);
+    };
+  }, []);
 
   return (
     <div className="relative text-white overflow-hidden">
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
         <video
+          ref={videoRef}
           autoPlay
           loop
           muted
           playsInline
+          preload="auto"
           className="absolute inset-0 w-full h-full object-cover"
         >
           <source src="/images/GettyImages-1311462781.mov" type="video/mp4" />

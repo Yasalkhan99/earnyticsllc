@@ -211,6 +211,8 @@ export default function Pricing() {
 
                 {/* CTA Button - Fixed Position */}
                 <button
+                  type="button"
+                  onClick={() => setIsPopupOpen(true)}
                   className={`relative w-full py-4 rounded-xl font-semibold transition-all duration-300 overflow-hidden group/btn ${
                     plan.highlighted
                       ? "bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-lg hover:shadow-2xl hover:from-orange-600 hover:to-red-600"

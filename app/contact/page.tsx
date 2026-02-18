@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ContactForm from "@/components/ContactForm";
 
 export default function ContactPage() {
   return (
@@ -23,82 +24,7 @@ export default function ContactPage() {
           {/* Contact Form */}
           <div className="bg-white rounded-3xl shadow-2xl p-10">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Send us a Message</h2>
-            <form className="space-y-6">
-              {/* Name */}
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Full Name *
-                </label>
-                <input
-                  type="text"
-                  placeholder="John Doe"
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:outline-none transition-colors"
-                  required
-                />
-              </div>
-
-              {/* Email */}
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Email Address *
-                </label>
-                <input
-                  type="email"
-                  placeholder="john@example.com"
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:outline-none transition-colors"
-                  required
-                />
-              </div>
-
-              {/* Phone */}
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Phone Number
-                </label>
-                <input
-                  type="tel"
-                  placeholder="+1 (555) 123-4567"
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:outline-none transition-colors"
-                />
-              </div>
-
-              {/* Service Selection */}
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Service Interested In
-                </label>
-                <select className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:outline-none transition-colors">
-                  <option>Select a service</option>
-                  <option>Website Design</option>
-                  <option>Website Development</option>
-                  <option>E-Commerce</option>
-                  <option>SEO Services</option>
-                  <option>Branding</option>
-                  <option>Other</option>
-                </select>
-              </div>
-
-              {/* Message */}
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Your Message *
-                </label>
-                <textarea
-                  rows={5}
-                  placeholder="Tell us about your project..."
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-orange-500 focus:outline-none transition-colors resize-none"
-                  required
-                ></textarea>
-              </div>
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white py-4 rounded-xl font-semibold text-lg hover:from-orange-600 hover:to-red-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-              >
-                Send Message 🚀
-              </button>
-            </form>
+            <ContactForm />
           </div>
 
           {/* Contact Information */}
@@ -199,15 +125,21 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* Map Section */}
+        {/* Map Section - 734 S Charlotte St, Lombard, IL 60148 */}
         <div className="mt-20 max-w-6xl mx-auto">
           <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
-            <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-              <div className="text-center">
-                <span className="text-6xl mb-4 block">🗺️</span>
-                <p className="text-gray-600 font-medium">Map Integration</p>
-                <p className="text-gray-500 text-sm">Lombard, IL 60148</p>
-              </div>
+            <div className="aspect-video w-full">
+              <iframe
+                title="Earnytics LLC - 734 S Charlotte St, Lombard, IL 60148"
+                src="https://maps.google.com/maps?q=734+S+Charlotte+St,+Lombard,+IL+60148&z=15&output=embed"
+                className="w-full h-full border-0"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+            <div className="p-4 text-center border-t border-gray-100">
+              <p className="text-gray-600 font-medium">734 S Charlotte St, Lombard, IL 60148</p>
             </div>
           </div>
         </div>

@@ -8,20 +8,72 @@ interface PopupModalProps {
 }
 
 export default function PopupModal({ isOpen, onClose }: PopupModalProps) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [service, setService] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
   if (!isOpen) return null;
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("sending");
+    setErrorMessage("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          phone: phone || undefined,
+          service: service || undefined,
+          message,
+          source: "popup",
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setStatus("error");
+        setErrorMessage(data.error || "Something went wrong. Please try again.");
+        return;
+      }
+      setStatus("success");
+      setName("");
+      setEmail("");
+      setPhone("");
+      setService("");
+      setMessage("");
+      setTimeout(() => {
+        onClose();
+        setStatus("idle");
+      }, 1500);
+    } catch {
+      setStatus("error");
+      setErrorMessage("Network error. Please try again.");
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fadeIn">
-      {/* Backdrop */}
-      <div 
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+      {/* Backdrop - behind modal */}
+      <div
+        className="absolute inset-0 z-40 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
-      ></div>
+        aria-hidden
+      />
 
-      {/* Modal - Compact Size */}
-      <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden animate-slideUp">
+      {/* Modal - above backdrop; stopPropagation so clicks/focus stay inside modal */}
+      <div
+        className="relative z-50 bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden animate-slideUp"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Close Button */}
         <button
+          type="button"
           onClick={onClose}
           className="absolute top-3 right-3 w-8 h-8 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-colors z-10 shadow-md"
         >
@@ -38,13 +90,15 @@ export default function PopupModal({ isOpen, onClose }: PopupModalProps) {
 
         {/* Compact Form */}
         <div className="p-6">
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleSubmit}>
             {/* Name */}
             <div>
               <input
                 type="text"
                 placeholder="Your Name *"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 focus:outline-none transition-all text-sm"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 focus:outline-none transition-all text-sm text-gray-900"
                 required
               />
             </div>
@@ -54,7 +108,9 @@ export default function PopupModal({ isOpen, onClose }: PopupModalProps) {
               <input
                 type="email"
                 placeholder="Email Address *"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 focus:outline-none transition-all text-sm"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 focus:outline-none transition-all text-sm text-gray-900"
                 required
               />
             </div>
@@ -64,20 +120,26 @@ export default function PopupModal({ isOpen, onClose }: PopupModalProps) {
               <input
                 type="tel"
                 placeholder="Phone Number (Optional)"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 focus:outline-none transition-all text-sm"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 focus:outline-none transition-all text-sm text-gray-900"
               />
             </div>
 
             {/* Service */}
             <div>
-              <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 focus:outline-none transition-all text-sm text-gray-600">
-                <option>What service do you need?</option>
-                <option>Website Design</option>
-                <option>Development</option>
-                <option>E-Commerce</option>
-                <option>SEO Services</option>
-                <option>Branding</option>
-                <option>Other</option>
+              <select
+                value={service}
+                onChange={(e) => setService(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 focus:outline-none transition-all text-sm text-gray-600"
+              >
+                <option value="">What service do you need?</option>
+                <option value="Website Design">Website Design</option>
+                <option value="Development">Development</option>
+                <option value="E-Commerce">E-Commerce</option>
+                <option value="SEO Services">SEO Services</option>
+                <option value="Branding">Branding</option>
+                <option value="Other">Other</option>
               </select>
             </div>
 
@@ -86,16 +148,29 @@ export default function PopupModal({ isOpen, onClose }: PopupModalProps) {
               <textarea
                 rows={3}
                 placeholder="Brief message about your project..."
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 focus:outline-none transition-all resize-none text-sm"
-              ></textarea>
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 focus:outline-none transition-all resize-none text-sm text-gray-900"
+              />
             </div>
 
+            {status === "error" && (
+              <p className="text-sm text-red-600 bg-red-50 px-4 py-2 rounded-lg">
+                {errorMessage}
+              </p>
+            )}
+            {status === "success" && (
+              <p className="text-sm text-green-600 bg-green-50 px-4 py-2 rounded-lg">
+                Message sent! We&apos;ll get back to you soon.
+              </p>
+            )}
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-500 text-white py-3 rounded-lg font-semibold hover:from-blue-600 hover:via-cyan-600 hover:to-teal-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-[1.02]"
+              disabled={status === "sending"}
+              className="w-full bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-500 text-white py-3 rounded-lg font-semibold hover:from-blue-600 hover:via-cyan-600 hover:to-teal-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-[1.02] disabled:opacity-70 disabled:pointer-events-none"
             >
-              Send Message ✉️
+              {status === "sending" ? "Sending..." : "Send Message ✉️"}
             </button>
 
             {/* Quick Info */}
