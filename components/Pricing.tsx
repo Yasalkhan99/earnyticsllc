@@ -4,79 +4,96 @@ import { useState } from "react";
 import PopupModal from "./PopupModal";
 import Image from "next/image";
 
+const BASE_FEATURES = [
+  "FREE Round of revision",
+  "Lowest Price in the Industry",
+  "FREE consultation",
+  "100% Money Back Guarantee"
+];
+
+function getFeatures(deliveryDays: number) {
+  return [
+    BASE_FEATURES[0],
+    `Delivery within ${deliveryDays} business days`,
+    ...BASE_FEATURES.slice(1)
+  ];
+}
+
 export default function Pricing() {
-  const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("monthly");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const plans = [
     {
-      name: "Starter",
-      description: "Perfect for individuals and small projects",
-      monthlyPrice: 49,
-      yearlyPrice: 490,
+      name: "Basic",
+      oneTimePrice: 299,
+      description: "2 Logo Concept by 1 Logo Designer",
       icon: "/images/Earnytics LLc Icon/Brown.png",
       gradient: "from-blue-500 to-cyan-500",
-      features: [
-        "Up to 5 Pages",
-        "Basic SEO Setup",
-        "Mobile Responsive Design",
-        "1 GB Storage",
-        "Email Support",
-        "SSL Certificate",
-        "Free Domain for 1 Year"
-      ],
-      highlighted: false
+      deliveryDays: 2,
+      highlighted: false,
+      popular: false
+    },
+    {
+      name: "Start Up",
+      oneTimePrice: 299,
+      description: "4 Logo Concept by 2 Logo Designer",
+      icon: "/images/Earnytics LLc Icon/Brown.png",
+      gradient: "from-blue-600 to-cyan-600",
+      deliveryDays: 2,
+      highlighted: false,
+      popular: false
     },
     {
       name: "Professional",
-      description: "Best for growing businesses and agencies",
-      monthlyPrice: 149,
-      yearlyPrice: 1490,
+      oneTimePrice: 999,
+      description: "10 Logo Concept by 6 Logo Designer",
       icon: "/images/Earnytics LLc Icon/Platinum.png",
       gradient: "from-orange-500 to-pink-500",
-      features: [
-        "Up to 20 Pages",
-        "Advanced SEO & Analytics",
-        "E-Commerce Integration",
-        "10 GB Storage",
-        "Priority Support",
-        "Custom Domain",
-        "Social Media Integration",
-        "Blog & CMS",
-        "Contact Forms"
-      ],
+      deliveryDays: 3,
       highlighted: true,
       popular: true
     },
     {
-      name: "Enterprise",
-      description: "For large organizations and complex needs",
-      monthlyPrice: 399,
-      yearlyPrice: 3990,
+      name: "Basic 1",
+      oneTimePrice: 1399,
+      description: "Unlimited Logo Concept by 6 Logo Designer",
+      icon: "/images/Earnytics LLc Icon/Brown.png",
+      gradient: "from-blue-500 to-cyan-500",
+      deliveryDays: 2,
+      highlighted: false,
+      popular: false
+    },
+    {
+      name: "Start Up 1",
+      oneTimePrice: 1999,
+      description: "Unlimited Logo Concept by 8 Logo Designer",
+      icon: "/images/Earnytics LLc Icon/Platinum.png",
+      gradient: "from-orange-600 to-pink-600",
+      deliveryDays: 2,
+      highlighted: false,
+      popular: false
+    },
+    {
+      name: "Professional 1",
+      oneTimePrice: 4000,
+      description: "Unlimited Logo Concept by 10 Logo Designer",
       icon: "/images/Earnytics LLc Icon/Diamond.png",
       gradient: "from-purple-500 to-pink-500",
-      features: [
-        "Unlimited Pages",
-        "Premium SEO Package",
-        "Advanced E-Commerce",
-        "Unlimited Storage",
-        "24/7 Dedicated Support",
-        "Custom Development",
-        "API Integration",
-        "Multi-language Support",
-        "Advanced Analytics",
-        "Team Collaboration Tools"
-      ],
-      highlighted: false
+      deliveryDays: 3,
+      highlighted: false,
+      popular: false
     }
-  ];
+  ].map((p) => ({ ...p, features: getFeatures(p.deliveryDays) }));
 
-  const getPrice = (plan: typeof plans[0]) => {
-    return billingCycle === "monthly" ? plan.monthlyPrice : plan.yearlyPrice;
-  };
+  const getDisplayPrice = (plan: (typeof plans)[0]) => ({
+    value: plan.oneTimePrice,
+    suffix: " one-time",
+    label: "One-time payment"
+  });
 
-  const getSavings = (plan: typeof plans[0]) => {
-    return plan.monthlyPrice * 12 - plan.yearlyPrice;
+  const formatPrice = (n: number) => {
+    if (n >= 1000) return n.toLocaleString();
+    return n.toString();
   };
 
   return (
@@ -85,161 +102,86 @@ export default function Pricing() {
         {/* Header */}
         <div className="text-center mb-16">
           <p className="text-orange-500 text-sm font-semibold mb-3 uppercase tracking-wider">
-            Pricing Plans
+            Logo &amp; Branding
           </p>
           <h2 className="text-5xl font-bold text-gray-900 mb-4">
             Choose Your Perfect Plan
           </h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-8">
-            Flexible pricing options designed to scale with your business
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-6">
+            One-time pricing with FREE revision, fast delivery, and money-back guarantee
           </p>
-
-          {/* Billing Toggle */}
-          <div className="inline-flex items-center bg-white rounded-full p-1.5 shadow-lg border border-gray-200">
-            <button
-              onClick={() => setBillingCycle("monthly")}
-              className={`px-8 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
-                billingCycle === "monthly"
-                  ? "bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-md"
-                  : "text-gray-600 hover:text-gray-900"
-              }`}
-            >
-              Monthly
+          <a href="#pricing-cards">
+            <button className="px-8 py-3 rounded-full text-sm font-semibold bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-md hover:from-orange-600 hover:to-red-600 transition-all hover:shadow-lg">
+              Pricing Plans
             </button>
-            <button
-              onClick={() => setBillingCycle("yearly")}
-              className={`px-8 py-3 rounded-full text-sm font-semibold transition-all duration-300 relative ${
-                billingCycle === "yearly"
-                  ? "bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-md"
-                  : "text-gray-600 hover:text-gray-900"
-              }`}
-            >
-              Yearly
-              <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-2 py-0.5 rounded-full">
-                Save 20%
-              </span>
-            </button>
-          </div>
+          </a>
         </div>
 
-        {/* Pricing Cards - Equal Heights with Hover Effects */}
-        <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {plans.map((plan, index) => (
-            <div
-              key={index}
-              className={`relative bg-white rounded-3xl overflow-hidden transition-all duration-500 group cursor-pointer ${
-                plan.highlighted
-                  ? "shadow-2xl ring-2 ring-orange-500 lg:scale-105 hover:scale-110"
-                  : "shadow-lg hover:shadow-2xl hover:scale-105"
-              }`}
-              style={{ minHeight: '750px' }}
-            >
-              {/* Hover Glow Effect */}
-              <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none ${
-                plan.highlighted 
-                  ? "bg-gradient-to-r from-orange-500/10 via-red-500/10 to-pink-500/10" 
-                  : "bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10"
-              }`}></div>
-
-              {/* Popular Badge */}
-              {plan.popular && (
-                <div className="absolute top-0 right-0 z-10">
-                  <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-bl-2xl font-semibold text-xs flex items-center space-x-1 group-hover:scale-110 transition-transform duration-300">
-                    <span>⭐</span>
-                    <span>Most Popular</span>
+        {/* Pricing Cards - 6 plans */}
+        <div id="pricing-cards" className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto scroll-mt-8">
+          {plans.map((plan, index) => {
+            const { value, suffix, label } = getDisplayPrice(plan);
+            return (
+              <div
+                key={index}
+                className={`relative bg-white rounded-2xl overflow-hidden transition-all duration-500 group cursor-pointer border border-orange-200 shadow-lg hover:shadow-xl ${
+                  plan.highlighted
+                    ? "ring-2 ring-orange-500 lg:scale-[1.02]"
+                    : "hover:scale-[1.02]"
+                }`}
+              >
+                {plan.popular && (
+                  <div className="absolute top-0 right-0 z-10">
+                    <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-1.5 rounded-bl-xl font-semibold text-xs">
+                      ⭐ Most Popular
+                    </div>
                   </div>
-                </div>
-              )}
-
-              {/* Header - Fixed Height */}
-              <div className={`relative bg-gradient-to-br ${plan.gradient} p-8 text-white text-center h-[180px] flex flex-col justify-center transition-all duration-300 group-hover:brightness-110`}>
-                <div className="w-20 h-20 mx-auto mb-3 transform group-hover:scale-110 transition-transform duration-300">
-                  <Image 
-                    src={plan.icon} 
-                    alt={plan.name}
-                    width={80}
-                    height={80}
-                    className="w-full h-full object-contain drop-shadow-lg"
-                  />
-                </div>
-                <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-                <p className="text-white/90 text-sm">{plan.description}</p>
-              </div>
-
-              {/* Pricing - Fixed Height */}
-              <div className="relative p-6 text-center bg-white h-[120px] flex flex-col justify-center">
-                <div className="flex items-baseline justify-center mb-1">
-                  <span className="text-xl text-gray-500">$</span>
-                  <span className="text-5xl font-bold text-gray-900 group-hover:text-orange-500 transition-colors duration-300">{getPrice(plan)}</span>
-                  <span className="text-gray-600 ml-1">
-                    /{billingCycle === "monthly" ? "mo" : "yr"}
-                  </span>
-                </div>
-                {billingCycle === "yearly" ? (
-                  <p className="text-green-600 text-sm font-medium mt-2">
-                    💰 Save ${getSavings(plan)}/year
-                  </p>
-                ) : (
-                  <div className="h-6"></div>
                 )}
+
+                <div className={`bg-gradient-to-br ${plan.gradient} p-6 text-white text-center transition-all duration-300 group-hover:brightness-110`}>
+                  <div className="w-16 h-16 mx-auto mb-2 flex items-center justify-center">
+                    <Image
+                      src={plan.icon}
+                      alt={plan.name}
+                      width={64}
+                      height={64}
+                      className="w-full h-full object-contain drop-shadow-lg"
+                    />
+                  </div>
+                  <h3 className="text-xl font-bold">{plan.name}</h3>
+                </div>
+
+                <div className="p-6">
+                  <div className="text-center mb-4">
+                    <div className="flex items-baseline justify-center gap-0.5">
+                      <span className="text-gray-600 text-lg">$</span>
+                      <span className="text-4xl font-bold text-orange-500">{formatPrice(value)}</span>
+                      <span className="text-gray-500 text-sm ml-1">{suffix}</span>
+                    </div>
+                    <p className="text-gray-500 text-xs mt-1">{label}</p>
+                  </div>
+                  <p className="text-gray-700 text-sm font-medium mb-4 text-center">{plan.description}</p>
+
+                  <ul className="space-y-2 mb-6">
+                    {plan.features.map((f, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
+                        <span className="text-orange-500 flex-shrink-0 mt-0.5">✔</span>
+                        <span>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <button
+                    type="button"
+                    onClick={() => setIsPopupOpen(true)}
+                    className="w-full py-3 rounded-xl font-semibold bg-gradient-to-r from-orange-500 to-red-500 text-white hover:from-orange-600 hover:to-red-600 transition-all shadow-md hover:shadow-lg"
+                  >
+                    ORDER NOW
+                  </button>
+                </div>
               </div>
-
-              {/* Features - No Scroll, Adjusted Height */}
-              <div className="relative px-8 pb-8">
-                <ul className="space-y-2.5 mb-6" style={{ minHeight: '320px' }}>
-                  {plan.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-start transform group-hover:translate-x-1 transition-transform duration-200" style={{ transitionDelay: `${featureIndex * 30}ms` }}>
-                      <div className="flex-shrink-0 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3 mt-0.5 group-hover:bg-green-600 group-hover:scale-110 transition-all duration-200">
-                        <svg
-                          className="w-3 h-3 text-white"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={3}
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                      </div>
-                      <span className="text-gray-700 text-sm leading-relaxed group-hover:text-gray-900 transition-colors duration-200">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* CTA Button - Fixed Position */}
-                <button
-                  type="button"
-                  onClick={() => setIsPopupOpen(true)}
-                  className={`relative w-full py-4 rounded-xl font-semibold transition-all duration-300 overflow-hidden group/btn ${
-                    plan.highlighted
-                      ? "bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-lg hover:shadow-2xl hover:from-orange-600 hover:to-red-600"
-                      : "bg-gray-900 text-white hover:bg-gray-800"
-                  }`}
-                >
-                  <span className="relative z-10 flex items-center justify-center">
-                    Get Started Now 
-                    <span className="ml-2 group-hover/btn:translate-x-1 transition-transform duration-300">→</span>
-                  </span>
-                  {/* Button Shine Effect */}
-                  <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></div>
-                </button>
-                
-                {plan.highlighted ? (
-                  <p className="text-center text-xs text-gray-500 mt-3 h-8">
-                    ⚡ Setup in minutes • No credit card required
-                  </p>
-                ) : (
-                  <div className="h-8 mt-3"></div>
-                )}
-              </div>
-
-              {/* Bottom Border Accent on Hover */}
-              <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${plan.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`}></div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Trust Section */}
